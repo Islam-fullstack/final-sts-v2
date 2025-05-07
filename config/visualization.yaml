@@ -1,0 +1,28 @@
+visualization:
+  window_width: 1280
+  window_height: 720
+  fps: 60
+  scale: 2
+  background_color: [240, 240, 240]
+  grid_color: [200, 200, 200]
+  show_metrics: true
+  show_grid: true
+  camera:
+    initial_position: [0, 0]
+    initial_zoom: 1.0
+  ui:
+    font: 'Arial'
+    font_size: 14
+    text_color: [0, 0, 0]
+    button_color: [200, 200, 200]
+    button_hover_color: [180, 180, 180]
+  colors:
+    road: [100, 100, 100]
+    lane_marking: [255, 255, 255]
+    car: [0, 0, 255]
+    bus: [0, 200, 0]
+    truck: [255, 100, 0]
+    motorcycle: [255, 0, 0]
+    traffic_light_red: [255, 0, 0]
+    traffic_light_yellow: [255, 255, 0]
+    traffic_light_green: [0, 255, 0]

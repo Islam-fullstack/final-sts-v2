@@ -1,0 +1,25 @@
+2025-05-07 06:40:40,308 - main - INFO - Запуск системы Smart Traffic System
+2025-05-07 06:40:40,308 - TrafficSimulator - INFO - Environment: 4 roads, 1 intersections.
+2025-05-07 06:40:40,308 - TrafficSimulator - INFO - Controllers setup completed.
+2025-05-07 06:40:40,315 - TrafficSimulator - INFO - Initialized 1 traffic generators.
+2025-05-07 06:40:40,321 - TrafficSimulator - INFO - Metrics collector initialized.
+2025-05-07 06:45:03,719 - main - INFO - Запуск системы Smart Traffic System
+2025-05-07 06:45:03,719 - TrafficSimulator - INFO - Environment: 4 roads, 1 intersections.
+2025-05-07 06:45:03,719 - TrafficSimulator - INFO - Controllers setup completed.
+2025-05-07 06:45:03,721 - TrafficSimulator - INFO - Initialized 1 traffic generators.
+2025-05-07 06:45:03,725 - TrafficSimulator - INFO - Metrics collector initialized.
+2025-05-07 07:05:59,000 - main - INFO - Запуск системы Smart Traffic System
+2025-05-07 07:05:59,000 - TrafficSimulator - INFO - Environment: 4 roads, 1 intersections.
+2025-05-07 07:05:59,000 - TrafficSimulator - INFO - Controllers setup completed.
+2025-05-07 07:05:59,003 - TrafficSimulator - INFO - Initialized 1 traffic generators.
+2025-05-07 07:05:59,004 - TrafficSimulator - INFO - Metrics collector initialized.
+2025-05-07 07:15:25,485 - main - INFO - Запуск системы Smart Traffic System
+2025-05-07 07:15:25,485 - TrafficSimulator - INFO - Environment: 4 roads, 1 intersections.
+2025-05-07 07:15:25,486 - TrafficSimulator - INFO - Controllers setup completed.
+2025-05-07 07:15:25,486 - TrafficSimulator - INFO - Initialized 1 traffic generators.
+2025-05-07 07:15:25,486 - TrafficSimulator - INFO - Metrics collector initialized.
+2025-05-07 07:18:27,720 - main - INFO - Запуск системы Smart Traffic System
+2025-05-07 07:18:27,721 - TrafficSimulator - INFO - Environment: 4 roads, 1 intersections.
+2025-05-07 07:18:27,721 - TrafficSimulator - INFO - Controllers setup completed.
+2025-05-07 07:18:27,721 - TrafficSimulator - INFO - Initialized 1 traffic generators.
+2025-05-07 07:18:27,721 - TrafficSimulator - INFO - Metrics collector initialized.

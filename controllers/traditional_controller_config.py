@@ -1,17 +1,11 @@
+#!/usr/bin/env python
 """
 Файл: controllers/traditional_controller_config.py
 
-Описание:
-  Класс TraditionalControllerConfig предназначен для хранения и валидации
-  конфигурации традиционного контроллера светофоров. Класс позволяет:
-    - загрузить конфигурацию из YAML файла;
-    - проверить корректность настроек;
-    - получить план времени для указанного времени суток;
-    - экспортировать конфигурацию в виде словаря.
+Класс TraditionalControllerConfig для хранения и валидации конфигурации традиционного контроллера.
 """
 
 import yaml
-
 
 class TraditionalControllerConfig:
     def __init__(self, phase_settings=None, timing_plans=None, synchronization_settings=None, emergency_settings=None):
@@ -22,15 +16,6 @@ class TraditionalControllerConfig:
 
     @classmethod
     def load_from_file(cls, filename):
-        """
-        Загружает конфигурацию из YAML файла.
-
-        Аргументы:
-          filename (str): Путь к YAML файлу.
-
-        Возвращает:
-          TraditionalControllerConfig: Объект конфигурации.
-        """
         with open(filename, 'r') as file:
             data = yaml.safe_load(file)
         config = cls(
@@ -43,12 +28,6 @@ class TraditionalControllerConfig:
         return config
 
     def validate_config(self):
-        """
-        Проверяет корректность конфигурационных настроек.
-        
-        Выбрасывает:
-          ValueError: Если настройки некорректны.
-        """
         if not self.phase_settings:
             raise ValueError("Настройки фаз (phase_settings) отсутствуют.")
         if not isinstance(self.timing_plans, list):
@@ -59,15 +38,6 @@ class TraditionalControllerConfig:
             raise ValueError("Некорректные настройки ЧС: отсутствует ключ 'enabled'.")
 
     def get_timing_for_time_of_day(self, time_of_day):
-        """
-        Возвращает план длительностей фаз для заданного времени суток.
-
-        Аргументы:
-          time_of_day (str): Например, "Morning Peak", "Evening Peak", "Night", "Default".
-
-        Возвращает:
-          list: Список длительностей фаз.
-        """
         for plan in self.timing_plans:
             if time_of_day in plan.get("time_range", []):
                 return plan.get("phase_durations", [])
@@ -77,12 +47,6 @@ class TraditionalControllerConfig:
         return []
 
     def to_dict(self):
-        """
-        Экспортирует конфигурацию в формате словаря.
-        
-        Возвращает:
-          dict: Конфигурация.
-        """
         return {
             "phases": self.phase_settings,
             "timing_plans": self.timing_plans,
@@ -90,12 +54,7 @@ class TraditionalControllerConfig:
             "emergency": self.emergency_settings
         }
 
-
 def main():
-    """
-    Демонстрация работы TraditionalControllerConfig.
-    Загружает конфигурацию из файла YAML, выполняет валидацию и выводит настройки.
-    """
     config_filename = "traditional_controller.yaml"
     sample_config = {
         "intersection_id": "main_intersection",
@@ -160,16 +119,10 @@ def main():
             {"name": "Default", "time_range": ["default"], "phase_durations": [40, 20, 40, 20]}
         ],
         "synchronization": {
-            "enabled": False,
-            "master_intersection": "main_intersection",
-            "affected_intersections": ["second_intersection", "third_intersection"],
-            "offset_seconds": [0, 15, 30]
+            "enabled": False
         },
         "emergency": {
-            "enabled": False,
-            "priority_direction": "north_south",
-            "min_green_time": 10,
-            "max_red_time": 60
+            "enabled": False
         }
     }
 
@@ -185,6 +138,5 @@ def main():
     except Exception as e:
         print("Ошибка при загрузке конфигурации:", e)
 
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

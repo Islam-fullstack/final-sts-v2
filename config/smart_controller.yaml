@@ -1,0 +1,95 @@
+intersection_id: 'main_intersection'
+controller_type: 'adaptive'
+
+traffic_light_groups:
+  - id: 'group_north_south'
+    traffic_lights: ['north_1', 'south_1']
+  - id: 'group_east_west'
+    traffic_lights: ['east_1', 'west_1']
+  - id: 'group_north_south_left'
+    traffic_lights: ['north_left', 'south_left']
+  - id: 'group_east_west_left'
+    traffic_lights: ['east_left', 'west_left']
+
+phases:
+  - id: 1
+    name: 'North-South Movement'
+    min_duration: 20
+    max_duration: 60
+    groups_states:
+      group_north_south: 'GREEN'
+      group_east_west: 'RED'
+      group_north_south_left: 'RED'
+      group_east_west_left: 'RED'
+  - id: 2
+    name: 'North-South Left Turn'
+    min_duration: 10
+    max_duration: 30
+    groups_states:
+      group_north_south: 'RED'
+      group_east_west: 'RED'
+      group_north_south_left: 'GREEN'
+      group_east_west_left: 'RED'
+  - id: 3
+    name: 'East-West Movement'
+    min_duration: 20
+    max_duration: 60
+    groups_states:
+      group_north_south: 'RED'
+      group_east_west: 'GREEN'
+      group_north_south_left: 'RED'
+      group_east_west_left: 'RED'
+  - id: 4
+    name: 'East-West Left Turn'
+    min_duration: 10
+    max_duration: 30
+    groups_states:
+      group_north_south: 'RED'
+      group_east_west: 'RED'
+      group_north_south_left: 'RED'
+      group_east_west_left: 'GREEN'
+
+adaptive_algorithm:
+  type: 'hybrid'
+  decision_interval: 5
+  webster:
+    saturation_flow_rate: 1800
+    lost_time_per_phase: 4
+    critical_volume_threshold: 0.9
+  queue_length:
+    weight: 0.7
+    threshold_short: 5
+    threshold_medium: 15
+    threshold_long: 30
+  waiting_time:
+    weight: 0.3
+    threshold_short: 30
+    threshold_medium: 60
+    threshold_long: 120
+  reinforcement_learning:
+    algorithm: 'q_learning'
+    learning_rate: 0.1
+    discount_factor: 0.9
+    exploration_rate: 0.1
+    model_path: 'models/rl_model.pkl'
+
+traffic_prediction:
+  enabled: true
+  method: 'regression'
+  horizon: 300
+  update_interval: 60
+  model_path: 'models/traffic_predictor.pkl'
+
+safety_constraints:
+  min_green_time: 10
+  min_red_time: 15
+  yellow_time: 3
+  all_red_time: 2
+  max_cycle_time: 180
+
+machine_learning:
+  enabled: true
+  training_interval: 86400
+  min_samples_for_training: 1000
+  feature_selection: ['queue_length', 'waiting_time', 'traffic_flow', 'time_of_day', 'day_of_week']
+  validation_split: 0.2

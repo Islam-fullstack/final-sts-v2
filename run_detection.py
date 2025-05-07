@@ -22,7 +22,7 @@ def main():
     parser.add_argument("--output", help="Путь для сохранения обработанного видео")
     args = parser.parse_args()
 
-    # Базовая конфигурация для детектора (stub)
+    # Базовая конфигурация для детектора
     detection_config = {"skip_frames": 1, "resize_dim": (640, 480), "device": "cpu"}
     detector = DetectionManager(video_source=args.video,
                                 output_path=args.output,

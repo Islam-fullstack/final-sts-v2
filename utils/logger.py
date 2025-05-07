@@ -4,12 +4,12 @@ utils/logger.py
 
 Реализует класс Logger для настройки системы логирования.
 Методы:
-  - setup_logger(level, log_file) - настройка логгера.
-  - get_logger(name) - получение логгера для компонента.
-  - set_log_level(level) - изменение уровня логирования.
-  - log_to_file(message, level) - запись в файл лога.
-  - log_to_console(message, level) - вывод в консоль.
-  - get_log_history() - получение истории логов.
+  - setup_logger(level, log_file): настройка логгера.
+  - get_logger(name): получение логгера для компонента.
+  - set_log_level(level): изменение уровня логирования.
+  - log_to_file(message, level): запись в файл лога.
+  - log_to_console(message, level): вывод в консоль.
+  - get_log_history(): получение истории логов.
 """
 
 import logging
@@ -50,7 +50,6 @@ class Logger:
     @staticmethod
     def get_log_history():
         return Logger._log_history
-
 
 if __name__ == "__main__":
     Logger.setup_logger("DEBUG", "test.log")

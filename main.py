@@ -5,22 +5,22 @@ main.py
 Основной исполняемый файл системы умных светофоров.
 Функциональность:
   - Парсинг аргументов командной строки.
-  - Загрузка конфигурации из файлов.
-  - Инициализация всех компонентов системы.
+  - Загрузка конфигурации из YAML файлов.
+  - Инициализация всех компонентов системы (симулятор, детектор, визуализатор, контроллеры).
   - Настройка логирования.
   - Выбор режима работы (simulation, comparison, visualization, detection).
   - Запуск выбранного режима.
   - Обработка завершения работы и сохранение результатов.
-  
+
 Аргументы командной строки:
-  --config - путь к конфигурационному файлу.
-  --mode - режим работы (simulation, comparison, visualization, detection).
-  --controller - тип контроллера (traditional, smart, both).
-  --duration - продолжительность симуляции.
-  --video - путь к видеофайлу для обработки.
-  --output - путь для сохранения результатов.
-  --debug - включение режима отладки.
-  --no-gui - запуск без графического интерфейса.
+  --config - путь к конфигурационному файлу
+  --mode - режим работы (simulation, comparison, visualization, detection)
+  --controller - тип контроллера (traditional, smart, both)
+  --duration - продолжительность симуляции (сек)
+  --video - путь к видеофайлу для обработки
+  --output - путь для сохранения результатов
+  --debug - включение режима отладки
+  --no-gui - запуск без графического интерфейса
 """
 
 import argparse
@@ -57,8 +57,7 @@ def main():
     # Обновляем конфигурацию для режима и контроллера
     config["mode"] = args.mode
     config["controller"] = args.controller
-    if args.duration:
-        config.setdefault("simulation", {})["duration"] = args.duration
+    config.setdefault("simulation", {})["duration"] = args.duration
     if args.video:
         config["video_source"] = args.video
     if args.output:
@@ -89,7 +88,7 @@ def main():
         logger.info("Запуск режима детекции")
         system.run_detection(args.video)
     
-    # Сохранение результатов, генерация отчёта
+    # Сохранение результатов и генерация отчёта
     if args.output:
         system.save_state(args.output)
     system.generate_report()

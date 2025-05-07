@@ -8,7 +8,7 @@ run_comparison.py
   - Сбор метрик для каждого контроллера.
   - Сравнительный анализ результатов.
   - Построение графиков и диаграмм.
-  - Генерация отчета.
+  - Генерация отчета с выводами.
   - Сохранение результатов анализа.
 """
 
@@ -17,7 +17,7 @@ import pandas as pd
 from visualization.comparison_analyzer import ComparisonAnalyzer
 
 def main():
-    # Для демонстрации используем dummy DataFrame результатов
+    # Для демонстрации создаем dummy DataFrame результатов для двух контроллеров
     data_traditional = pd.DataFrame({
         "average_waiting_time": [20, 22, 19, 21],
         "max_queue_length": [15, 16, 14, 17],

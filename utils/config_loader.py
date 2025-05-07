@@ -4,12 +4,12 @@ utils/config_loader.py
 
 Реализует класс ConfigLoader для загрузки и валидации конфигураций.
 Методы:
-  - load_config(filename) - загрузка конфигурации из YAML файла.
-  - validate_config(config, schema) - проверка структуры конфигурации.
-  - merge_configs(configs) - объединение нескольких конфигураций.
-  - get_schema(component) - получение схемы для валидации.
-  - save_config(config, filename) - сохранение конфигурации в файл.
-  - generate_default_config(component) - генерация конфигурации по умолчанию.
+  - load_config(filename): загрузка конфигурации из YAML файла.
+  - validate_config(config, schema): проверка структуры конфигурации.
+  - merge_configs(configs): объединение нескольких конфигураций.
+  - get_schema(component): получение схемы для валидации.
+  - save_config(config, filename): сохранение конфигурации в файл.
+  - generate_default_config(component): генерация конфигурации по умолчанию.
 """
 
 import yaml
@@ -23,7 +23,7 @@ class ConfigLoader:
 
     @staticmethod
     def validate_config(config, schema):
-        # Stub: здесь можно использовать jsonschema или другие библиотеки валидации
+        # Stub: при необходимости можно использовать jsonschema для валидации
         return True
 
     @staticmethod
@@ -45,7 +45,7 @@ class ConfigLoader:
 
     @staticmethod
     def generate_default_config(component):
-        # Stub: генерирует конфигурацию по умолчанию (пустой dict)
+        # Stub: генерирует конфигурацию по умолчанию
         return {}
 
 if __name__ == "__main__":

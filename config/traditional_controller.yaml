@@ -1,0 +1,67 @@
+intersection_id: 'main_intersection'
+cycle_time: 120
+offset: 0
+
+traffic_light_groups:
+  - id: 'group_north_south'
+    traffic_lights: ['north_1', 'south_1']
+  - id: 'group_east_west'
+    traffic_lights: ['east_1', 'west_1']
+  - id: 'group_north_south_left'
+    traffic_lights: ['north_left', 'south_left']
+  - id: 'group_east_west_left'
+    traffic_lights: ['east_left', 'west_left']
+
+phases:
+  - id: 1
+    name: 'North-South Movement'
+    duration: 40
+    groups_states:
+      group_north_south: 'GREEN'
+      group_east_west: 'RED'
+      group_north_south_left: 'RED'
+      group_east_west_left: 'RED'
+  - id: 2
+    name: 'North-South Left Turn'
+    duration: 20
+    groups_states:
+      group_north_south: 'RED'
+      group_east_west: 'RED'
+      group_north_south_left: 'GREEN'
+      group_east_west_left: 'RED'
+  - id: 3
+    name: 'East-West Movement'
+    duration: 40
+    groups_states:
+      group_north_south: 'RED'
+      group_east_west: 'GREEN'
+      group_north_south_left: 'RED'
+      group_east_west_left: 'RED'
+  - id: 4
+    name: 'East-West Left Turn'
+    duration: 20
+    groups_states:
+      group_north_south: 'RED'
+      group_east_west: 'RED'
+      group_north_south_left: 'RED'
+      group_east_west_left: 'GREEN'
+
+timing_plans:
+  - name: 'Morning Peak'
+    time_range: ['06:00', '09:00']
+    phase_durations: [30, 20, 50, 20]
+  - name: 'Evening Peak'
+    time_range: ['16:00', '19:00']
+    phase_durations: [30, 20, 50, 20]
+  - name: 'Night'
+    time_range: ['22:00', '05:00']
+    phase_durations: [25, 15, 25, 15]
+  - name: 'Default'
+    time_range: ['default']
+    phase_durations: [40, 20, 40, 20]
+
+synchronization:
+  enabled: false
+
+emergency:
+  enabled: false

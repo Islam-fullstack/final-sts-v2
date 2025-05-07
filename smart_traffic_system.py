@@ -7,20 +7,20 @@ smart_traffic_system.py
   - config: Конфигурация системы.
   - simulator: Экземпляр симулятора.
   - detector: Детектор транспорта.
-  - controllers: Словарь контроллеров (традиционный, умный и т.д.).
+  - controllers: Словарь контроллеров разных типов.
   - visualizer: Визуализатор.
   - metrics_collector: Коллектор метрик.
   - logger: Логгер системы.
   - status: Текущий статус системы.
   
 Методы:
-  - __init__(config) - инициализация.
+  - __init__(config) - инициализация с конфигурацией.
   - initialize_components() - инициализация всех компонентов.
   - start() - запуск системы.
   - stop() - остановка системы.
-  - pause(), resume() - пауза и возобновление.
+  - pause(), resume() - пауза и возобновление работы.
   - switch_controller(controller_type) - переключение контроллера.
-  - collect_metrics() - сбор метрик.
+  - collect_metrics() - сбор метрик работы.
   - save_state(filename) - сохранение состояния системы.
   - load_state(filename) - загрузка состояния системы.
   - run_simulation(duration) - запуск симуляции.
@@ -36,7 +36,6 @@ from utils.logger import Logger
 from simulation.simulator import TrafficSimulator
 from detection.detection_manager import DetectionManager
 from visualization.traffic_visualizer import TrafficVisualizer
-# Импорт других необходимых модулей можно расширить по необходимости
 
 class SmartTrafficSystem:
     def __init__(self, config):
@@ -51,24 +50,21 @@ class SmartTrafficSystem:
 
     def initialize_components(self, controller_type="smart", load_gui=True):
         # Инициализация симулятора
-        from simulation.simulator import TrafficSimulator
         self.simulator = TrafficSimulator(self.config)
         self.simulator.setup_environment()
-        self.simulator.setup_controllers()  # контроллеры выбираются внутри симулятора
+        self.simulator.setup_controllers()
         self.simulator.setup_traffic_generators()
         self.simulator.setup_metrics_collector()
         
         # Инициализация детектора
-        from detection.detection_manager import DetectionManager
         self.detector = DetectionManager(video_source=self.config.get("video_source", 0),
                                          output_path=self.config.get("detection_output", None),
                                          skip_frames=1,
                                          resize_dim=(640, 480),
                                          device="cpu")
         
-        # Инициализация визуализатора, если GUI разрешен
+        # Инициализация визуализатора, если GUI разрешён
         if load_gui:
-            from visualization.traffic_visualizer import TrafficVisualizer
             vis_config = self.config.get("visualization", {})
             self.visualizer = TrafficVisualizer(self.simulator, vis_config)
         
