@@ -1,0 +1,87 @@
+simulation:
+  name: 'Four-way Intersection Simulation'
+  time_step: 0.1 # шаг моделирования в секундах
+  random_seed: 42 # для воспроизводимости результатов
+  duration: 3600 # продолжительность симуляции в секундах
+  warm_up_time: 300 # время разогрева системы в секундах
+
+environment:
+  intersections:
+    - id: 'main_intersection'
+      position: [0, 0]
+      type: 'four_way'
+  roads:
+    - id: 'north_road'
+      start: [0, 100]
+      end: [0, 0]
+      length: 100
+      lanes: 2
+      speed_limit: 50 # км/ч
+    - id: 'south_road'
+      start: [0, 0]
+      end: [0, -100]
+      length: 100
+      lanes: 2
+      speed_limit: 50
+    - id: 'east_road'
+      start: [0, 0]
+      end: [100, 0]
+      length: 100
+      lanes: 2
+      speed_limit: 50
+    - id: 'west_road'
+      start: [-100, 0]
+      end: [0, 0]
+      length: 100
+      lanes: 2
+      speed_limit: 50
+  traffic_lights:
+    - id: 'north_1'
+      position: [0, 5]
+      road: 'north_road'
+      lane: 0
+    - id: 'north_2'
+      position: [0, 5]
+      road: 'north_road'
+      lane: 1
+
+traffic_generators:
+  - id: 'north_generator'
+    source_road: 'north_road'
+    position: [0, 100]
+    base_flow_rate: 600 # ТС в час
+    vehicle_types:
+      car: 0.7
+      bus: 0.1
+      truck: 0.15
+      motorcycle: 0.05
+    time_pattern:
+      morning_peak:
+        time_range: ['06:00', '09:00']
+        factor: 1.5
+      evening_peak:
+        time_range: ['16:00', '19:00']
+        factor: 1.8
+      night:
+        time_range: ['22:00', '06:00']
+        factor: 0.3
+
+metrics:
+  collection_interval: 30 # сбор метрик каждые 30 сек.
+  metrics_to_collect:
+    - average_waiting_time
+    - average_speed
+    - queue_length
+    - throughput
+    - fuel_consumption
+    - emissions
+  export_path: 'results/metrics.csv'
+
+scheduled_events:
+  - type: 'traffic_flow_change'
+    time: 1800 # через 30 минут
+    generator_id: 'north_generator'
+    new_flow_rate: 900 # увеличение потока
+  - type: 'emergency_vehicle'
+    time: 2400 # через 40 минут
+    route: ['south_road', 'main_intersection', 'north_road']
